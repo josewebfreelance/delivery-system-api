@@ -1,0 +1,143 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  UsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambdas/usersLambda.usersHandler
+      Runtime: nodejs18.x
+      CodeUri: ./dist
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+      Events:
+        GetUsers:
+          Type: Api
+          Properties:
+            Path: /api/users
+            Method: GET
+        FindUser:
+          Type: Api
+          Properties:
+            Path: /api/users/{id}
+            Method: GET
+        PostUsers:
+          Type: Api
+          Properties:
+            Path: /api/users
+            Method: POST
+        PutUsers:
+          Type: Api
+          Properties:
+            Path: /api/users/{id}
+            Method: PUT
+
+  AddressFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambdas/addressLambda.addressHandler
+      Runtime: nodejs18.x
+      CodeUri: ./dist
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        GetAddress:
+          Type: Api
+          Properties:
+            Path: /api/address
+            Method: GET
+        FindAddress:
+          Type: Api
+          Properties:
+            Path: /api/address/{id}
+            Method: GET
+        PostAddress:
+          Type: Api
+          Properties:
+            Path: /api/address
+            Method: POST
+        PutAddress:
+          Type: Api
+          Properties:
+            Path: /api/address/{id}
+            Method: PUT
+
+  CouriersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambdas/couriersLambda.couriersHandler
+      Runtime: nodejs18.x
+      CodeUri: ./dist
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+      Events:
+        GetCouriers:
+          Type: Api
+          Properties:
+            Path: /api/couriers
+            Method: GET
+        FindCouriers:
+          Type: Api
+          Properties:
+            Path: /api/couriers/{id}
+            Method: GET
+        PostCouriers:
+          Type: Api
+          Properties:
+            Path: /api/couriers
+            Method: POST
+        PutCouriers:
+          Type: Api
+          Properties:
+            Path: /api/couriers/{id}
+            Method: PUT
+
+  DeliveriesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambdas/deliveriesLambda.deliveriesHandler
+      Runtime: nodejs18.x
+      CodeUri: ./dist
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+      Events:
+        GetDeliveries:
+          Type: Api
+          Properties:
+            Path: /api/deliveries
+            Method: GET
+        FindUser:
+          Type: Api
+          Properties:
+            Path: /api/deliveries/{id}
+            Method: GET
+        PostDeliveries:
+          Type: Api
+          Properties:
+            Path: /api/deliveries
+            Method: POST
+        PutDeliveries:
+          Type: Api
+          Properties:
+            Path: /api/deliveries/{id}
+            Method: PUT
+        DeleteDeliveries:
+          Type: Api
+          Properties:
+            Path: /api/deliveries/{id}
+            Method: DELETE
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/"

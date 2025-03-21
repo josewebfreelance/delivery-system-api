@@ -1,0 +1,45 @@
+{
+  "name": "ermes-system-api",
+  "version": "1.0.0",
+  "description": "Sistema para administración y programación de entregas.",
+  "main": "app.ts",
+  "scripts": {
+    "build": "tsc && sam build",
+    "deploy": "sam deploy",
+    "local": "tsc && cp package.json dist/ && cp package-lock.json dist/ && sam build && sam local start-api",
+    "lint": "ts-standard",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JLEMUS",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "5.0.0",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7",
+    "standard": "17.1.2",
+    "ts-node-dev": "2.0.0",
+    "ts-standard": "12.0.2",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "3.751.0",
+    "@types/aws-serverless-express": "3.3.10",
+    "@types/cors": "2.8.17",
+    "aws-jwt-verify": "5.0.0",
+    "aws-sdk": "^2.1692.0",
+    "aws-serverless-express": "3.4.0",
+    "axios": "^1.7.9",
+    "cors": "2.8.5",
+    "dotenv": "^16.4.7",
+    "dynamoose": "^4.0.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.1.0",
+    "serverless-http": "^3.2.0",
+    "swagger-jsdoc": "6.2.8",
+    "swagger-ui-express": "5.0.1"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  }
+}
